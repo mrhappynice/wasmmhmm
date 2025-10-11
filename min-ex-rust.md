@@ -257,4 +257,39 @@ Even then, you can keep the same front-end and call a small HTTP endpoint that i
 * **TypeScript:** `wasm-pack` emits `.d.ts` so you can get types in TS projects.
 
 ---
+example nginx config:
 
+```nginx
+# Ensure wasm MIME is known (add once — in nginx.conf http{} or here)
+types {
+    application/wasm  wasm;
+}
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name site.com;
+
+    root /home/ngsite;
+    index web/index.html;
+
+    # Serve the app
+    location / {
+        try_files $uri $uri/ /web/index.html;
+    }
+
+    # Static assets (cache hard)
+    location ~* \.(wasm|js|css|png|jpg|jpeg|gif|svg|ico|woff2?)$ {
+        add_header Cache-Control "public, max-age=31536000, immutable";
+        try_files $uri =404;
+    }
+
+    # Optional: basic security headers
+    add_header X-Content-Type-Options nosniff;
+    add_header Referrer-Policy strict-origin-when-cross-origin;
+
+    # Optional: gzip for text assets (won't gzip .wasm by default)
+    gzip on;
+    gzip_types text/plain text/css application/javascript application/json;
+}
+```
