@@ -1,3 +1,5 @@
+NOT TESTED YET - SEE c-instructions.md FOR WORKING PROJ
+
 If you want “simple + lowest server resources,” the cleanest path is:
 
 **Serve static files with Nginx and run your Rust in the browser as WebAssembly.**
