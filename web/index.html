@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>C/C++ → WebAssembly Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>body{font-family:system-ui,sans-serif;margin:2rem}</style>
+</head>
+<body>
+  <h1>C/C++ → WASM (no frameworks)</h1>
+
+  <div>
+    <input id="name" placeholder="Your name" />
+    <button id="hello">Greet (C)</button>
+    <button id="hello_cpp">Greet (C++)</button>
+    <div id="greeting"></div>
+  </div>
+
+  <div>
+    <input id="limit" type="number" value="100000" />
+    <button id="count">Count primes ≤ n (C)</button>
+    <button id="count_cpp">Count primes ≤ n (C++)</button>
+    <div>Result: <span id="result">—</span></div>
+  </div>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
